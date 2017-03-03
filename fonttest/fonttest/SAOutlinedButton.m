@@ -9,7 +9,13 @@
 #import "SAOutlinedButton.h"
 #import <CoreText/CoreText.h>
 
-#import <AssetsLibrary/AssetsLibrary.h>
+@interface SAOutlinedButton ()
+@property (nonatomic, assign) CGFloat letterSpacing;
+@property (nonatomic, assign) CGFloat lineSpacing;
+@property (nonatomic, assign) UIEdgeInsets textInsets;
+@property (nonatomic, assign) BOOL automaticallyAdjustTextInsets;
+
+@end
 
 @implementation SAOutlinedButton
 
@@ -31,33 +37,27 @@
     return self;
 }
 
+- (void)setTitle:(NSString *)title forState:(UIControlState)state {
+    [super setTitle:title forState:state];
+    [self setNeedsDisplay];
+}
+static NSMutableDictionary *imageBufferDict;
+
 - (void)setDefaults {
+    
+    if (!imageBufferDict) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            imageBufferDict = [NSMutableDictionary dictionaryWithCapacity:8];
+        });
+    }
+    
     self.clipsToBounds = YES;
     self.letterSpacing = 0.0;
     self.automaticallyAdjustTextInsets = YES;
 }
 
-
-- (CGSize)sizeThatFits:(CGSize)size {
-    return [self intrinsicContentSize];
-}
-
-- (CGSize)intrinsicContentSize {
-    if (!self.titleLabel.text || [self.titleLabel.text isEqualToString:@""]) {
-        return CGSizeZero;
-    }
-    
-    CGRect textRect;
-    CTFrameRef frameRef = [self frameRefFromSize:CGSizeMake(self.titleLabel.preferredMaxLayoutWidth, CGFLOAT_MAX) textRectOutput:&textRect];
-    CFRelease(frameRef);
-    
-    return CGSizeMake(ceilf(CGRectGetWidth(textRect) + self.textInsets.left + self.textInsets.right),
-                      ceilf(CGRectGetHeight(textRect) + self.textInsets.top + self.textInsets.bottom));
-}
-
 #pragma mark - Accessors and Mutators
-
-
 - (void)setTextInsets:(UIEdgeInsets)textInsets {
     if (!UIEdgeInsetsEqualToEdgeInsets(self.textInsets, textInsets)) {
         _textInsets = textInsets;
@@ -72,65 +72,77 @@
     if (!self.titleLabel.text || [self.titleLabel.text isEqualToString:@""]) {
         return;
     }
+
+    UIImage *imageCache = [imageBufferDict objectForKey:self.titleLabel.text];
+    if (imageCache) {
+        [super setTitle:nil forState:self.state];
+        [self setImage:imageCache forState:self.state];
+        return;
+    }
+    
+    //加了描边之后，之前label的宽度要稍微加宽
+    CGFloat fontWidth = [self.titleLabel.text boundingRectWithSize:self.bounds.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.titleLabel.font} context:nil].size.width;
+    
     CGRect labelRect = self.titleLabel.frame;
+    CGSize size = labelRect.size;
+    size.width = fontWidth + self.strokeSize * 2;
+    labelRect.size = size;
     
     UIGraphicsBeginImageContextWithOptions(labelRect.size, NO, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    if (!context) {
+        return;
+    }
+    
     CGRect textRect;
     CTFrameRef frameRef = [self frameRefFromSize:labelRect.size textRectOutput:&textRect];
     
-    // Invert everything, because CG works with an inverted coordinate system.
+    //Core Graphic坐标系和ios的不一样，要做旋转
     CGContextTranslateCTM(context, 0.0, CGRectGetHeight(labelRect));
     CGContextScaleCTM(context, 1.0, -1.0);
     
+    //得到原始字体
     CGContextSaveGState(context);
-    // Draw text.
-    // Text needs invisible stroke for consistent character glyph widths.
     CGContextSetTextDrawingMode(context, kCGTextFillStroke);
     CGContextSetLineWidth(context, self.strokeSize * 2);
     CGContextSetLineJoin(context, kCGLineJoinRound);
     [[UIColor clearColor] setStroke];
-
     CTFrameDraw(frameRef, context);
     CGContextRestoreGState(context);
 
-    
-    // -------
-    // Step 5: Draw stroke.
-    // -------
+    //得到原始字体的图片
     CGContextSaveGState(context);
-        
     CGContextSetTextDrawingMode(context, kCGTextStroke);
-        
     CGImageRef image = NULL;
-    
-    // Create an image from the text.
     image = CGBitmapContextCreateImage(context);
-    UIImage *firstImg = [UIImage imageWithCGImage:image];
-    self.firstImgView.image = firstImg;
 
-    // Draw stroke.
+    //得到描边图片
     labelRect.origin = CGPointZero;
     CGImageRef strokeImage = [self strokeImageWithRect:labelRect frameRef:frameRef strokeSize:self.strokeSize*2  strokeColor:self.strokeColor];
+    
+    //将描边图片绘制到上下文中
     CGContextDrawImage(context, labelRect, strokeImage);
     
-    self.secondImgView.image = [UIImage imageWithCGImage:strokeImage];
-    // Draw the saved image over half of the stroke.
+    //将原始字体绘制到上下文中
     CGContextDrawImage(context, labelRect, image);
     
-    // Clean up.
     CGImageRelease(strokeImage);
     CGImageRelease(image);
         
     CGContextRestoreGState(context);
     
-    // End drawing context and finally draw the text with all styles.
-    
-    UIImage *newimage = UIGraphicsGetImageFromCurrentImageContext();
+    //取出上下文中的组合图片，也就是原始字体和描边字体的组合
+    UIImage *resultImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    [newimage drawInRect:self.titleLabel.frame];
-    self.thirdImgView.image = newimage;
-    [self setTitle:nil forState:UIControlStateNormal];
+    
+    //由于UIButton的title和background Image会挡住绘制的部分，所以这里直接将描边的字体设置为图片
+    if (resultImage) {
+        [imageBufferDict setObject:resultImage forKey:self.titleLabel.text];
+        [super setTitle:nil forState:self.state];
+        [self setImage:resultImage forState:self.state];
+    }
+    
     CFRelease(frameRef);
 }
 
@@ -244,7 +256,6 @@
 }
 
 #pragma mark - Image Functions
-
 - (CGImageRef)strokeImageWithRect:(CGRect)rect frameRef:(CTFrameRef)frameRef strokeSize:(CGFloat)strokeSize strokeColor:(UIColor *)strokeColor CF_RETURNS_RETAINED {
     // Create context.
     UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0.0);
@@ -263,7 +274,6 @@
     
     // Save clipping mask.
     CGImageRef clippingMask = CGBitmapContextCreateImage(context);
-    self.clipImgView.image = [UIImage imageWithCGImage:clippingMask];
     // Clear the content.
     CGContextClearRect(context, rect);
     // Draw stroke.

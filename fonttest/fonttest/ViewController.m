@@ -34,10 +34,7 @@ static NSString *FZYiHei_Simple = @"FZYiHei-M20S";
     [button setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
     button.strokeColor = [UIColor blackColor];
     button.strokeSize = 1;
-    button.firstImgView = self.firstImageView;
-    button.secondImgView = self.secondImageView;
-    button.thirdImgView = self.thirdImageView;
-    button.clipImgView = self.clipImgView;
+
     [self.view addSubview:button];
 }
 

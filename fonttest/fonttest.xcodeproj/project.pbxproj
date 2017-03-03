@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		281582101E69731E0065534E /* SAOutlinedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2815820F1E69731E0065534E /* SAOutlinedButton.m */; };
 		286B5FCA1E52EBEC00B4D25D /* UIOutlinedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 286B5FC91E52EBEC00B4D25D /* UIOutlinedLabel.m */; };
-		28704CBD1E657CC60093106B /* SAOutlinedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 28704CBC1E657CC60093106B /* SAOutlinedButton.m */; };
 		2898A8D81E51AE7F0005C91E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2898A8D71E51AE7F0005C91E /* main.m */; };
 		2898A8DB1E51AE7F0005C91E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2898A8DA1E51AE7F0005C91E /* AppDelegate.m */; };
 		2898A8DE1E51AE7F0005C91E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2898A8DD1E51AE7F0005C91E /* ViewController.m */; };
@@ -20,10 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2815820E1E69731E0065534E /* SAOutlinedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAOutlinedButton.h; sourceTree = "<group>"; };
+		2815820F1E69731E0065534E /* SAOutlinedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAOutlinedButton.m; sourceTree = "<group>"; };
 		286B5FC81E52EBEC00B4D25D /* UIOutlinedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIOutlinedLabel.h; sourceTree = "<group>"; };
 		286B5FC91E52EBEC00B4D25D /* UIOutlinedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIOutlinedLabel.m; sourceTree = "<group>"; };
-		28704CBB1E657CC60093106B /* SAOutlinedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAOutlinedButton.h; sourceTree = "<group>"; };
-		28704CBC1E657CC60093106B /* SAOutlinedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAOutlinedButton.m; sourceTree = "<group>"; };
 		2898A8D31E51AE7F0005C91E /* fonttest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fonttest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2898A8D71E51AE7F0005C91E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2898A8D91E51AE7F0005C91E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -70,10 +70,10 @@
 		2898A8D51E51AE7F0005C91E /* fonttest */ = {
 			isa = PBXGroup;
 			children = (
-				28704CBB1E657CC60093106B /* SAOutlinedButton.h */,
-				28704CBC1E657CC60093106B /* SAOutlinedButton.m */,
 				286B5FC81E52EBEC00B4D25D /* UIOutlinedLabel.h */,
 				286B5FC91E52EBEC00B4D25D /* UIOutlinedLabel.m */,
+				2815820E1E69731E0065534E /* SAOutlinedButton.h */,
+				2815820F1E69731E0065534E /* SAOutlinedButton.m */,
 				2898A8EF1E51B51E0005C91E /* SAFontStyle.h */,
 				2898A8F01E51B51E0005C91E /* SAFontStyle.m */,
 				2898A8D91E51AE7F0005C91E /* AppDelegate.h */,
@@ -171,11 +171,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2898A8F11E51B51E0005C91E /* SAFontStyle.m in Sources */,
+				281582101E69731E0065534E /* SAOutlinedButton.m in Sources */,
 				2898A8DE1E51AE7F0005C91E /* ViewController.m in Sources */,
 				286B5FCA1E52EBEC00B4D25D /* UIOutlinedLabel.m in Sources */,
 				2898A8DB1E51AE7F0005C91E /* AppDelegate.m in Sources */,
 				2898A8D81E51AE7F0005C91E /* main.m in Sources */,
-				28704CBD1E657CC60093106B /* SAOutlinedButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
