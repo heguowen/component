@@ -1,0 +1,4 @@
+
+<pkg-info format-version="2" identifier="com.apple.osXFontToolsrelease4Beta1.FontTools.pkg" version="1.0" install-location="/usr/bin" relocatable="true" auth="root">
+    <payload installKBytes="4640" numberOfFiles="17"/>
+</pkg-info>

@@ -1,0 +1,8 @@
+
+<pkg-info format-version="2" identifier="com.apple.osXFontToolsrelease4Beta1.FontToolbox.pkg" version="1.0" install-location="/Library/Frameworks" relocatable="true" auth="root">
+    <payload installKBytes="21940" numberOfFiles="395"/>
+    <bundle id="com.apple.fonts.FontToolbox" CFBundleIdentifier="com.apple.fonts.FontToolbox" path="./FontToolbox.framework" CFBundleVersion="55"/>
+    <bundle-version>
+        <bundle id="com.apple.fonts.FontToolbox"/>
+    </bundle-version>
+</pkg-info>

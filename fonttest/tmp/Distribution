@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<installer-script minSpecVersion="1.000000" authoringTool="com.apple.PackageMaker" authoringToolVersion="3.0.5" authoringToolBuild="196.1">
+    <title>OS X Font Tools, release 4 beta 1</title>
+    <options customize="allow" allow-external-scripts="no"/>
+    <domains enable_localSystem="true"/>
+    <background file="background" alignment="bottomleft" scaling="none"/>
+    <welcome file="Welcome"/>
+    <readme file="ReadMe"/>
+    <license file="License"/>
+    <choices-outline>
+        <line choice="choice0"/>
+        <line choice="choice3"/>
+        <line choice="choice4"/>
+    </choices-outline>
+    <choice id="choice0" title="FontToolbox">
+        <pkg-ref id="com.apple.osXFontToolsrelease4Beta1.FontToolbox.pkg"/>
+    </choice>
+    <choice id="choice3" title="Font Tools">
+        <pkg-ref id="com.apple.osXFontToolsrelease4Beta1.FontTools.pkg"/>
+    </choice>
+    <choice id="choice4" title="Keyboard Tools">
+        <pkg-ref id="com.apple.osXFontToolsrelease4Beta1.KeyboardTools.pkg"/>
+    </choice>
+    <pkg-ref id="com.apple.osXFontToolsrelease4Beta1.FontToolbox.pkg" installKBytes="21940" version="1.0" auth="Root">#fonttoolbox.pkg</pkg-ref>
+    <pkg-ref id="com.apple.osXFontToolsrelease4Beta1.FontTools.pkg" installKBytes="4640" version="1.0" auth="Root">#fontTools.pkg</pkg-ref>
+    <pkg-ref id="com.apple.osXFontToolsrelease4Beta1.KeyboardTools.pkg" installKBytes="212" version="1.0" auth="Root">#keyboardTools.pkg</pkg-ref>
+</installer-script>

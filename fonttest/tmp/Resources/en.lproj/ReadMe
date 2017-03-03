@@ -1,0 +1,66 @@
+{\rtf1\ansi\ansicpg950\cocoartf1138\cocoasubrtf230
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww10700\viewh12680\viewkind0
+\pard
+
+\f0\fs24 \cf0 Read the following before you install the OS X Font Tools. It includes information about supported computers, system requirements, and installation.\
+\
+For more information about the OS X Font Tools, visit http://developer.apple.com/fonts/.\
+\
+This version is release 4, beta 1.\
+\
+
+\b System requirements\
+\pard\tx360
+
+\b0 \cf0 \
+\pard
+\cf0 Release 4 (beta 1) of the OS X Font Tools requires OS X 10.6 or later; 10.7 is recommended.\
+\
+Make sure you have the latest version of OS X and other Apple software. Choose Software Update from the Apple Menu, and install any recommended updates.\
+\
+
+\b What\'92s New\
+
+\b0 \
+\'95 Numerous bug fixes and new features\
+\'95 New command-line utilities, including ftxglyphadder, ftxmakettc, and ftxsplitter\
+\'95 A new source file format for 'morx' and 'just' tables\
+\
+
+\b Command-line Utilities\
+
+\b0 \
+The core of the OS X Font Tools is a set of command-line utilities which are installed via the OS X Font Tool installer.  This installer also includes two command-line utilities for developing keyboards on OS X: klcompile and kluchrtoxml.  klcompiler compiles XML-style keyboard layouts and lets you find errors in them before they are installed.  kluchrtoxml converts old keyboard resources to XML.\
+\
+The installer is set up so that the font tools and keyboard tools may be installed separately.  \
+\
+The command-line utilities are installed in /usr/bin. They presuppose some familiarity with using the Terminal application and the Unix shell. \
+\
+
+\b The Font Toolbox Framework\
+
+\b0 \
+The OS X Font Tools installer will also install a new framework, the Font Toolbox framework, that is not part of the OS X system. This framework is not intended for use by applications or tools other than the OS X Font Tools. It is required by most of the font tools and should not be deleted.\
+\
+The installer will place this framework in /Library/Frameworks, but you are free to move it to ~/Library/Frameworks.\
+\
+
+\b Applications\
+
+\b0 \
+There are also three applications included: Blinker, FontProoferX, and MorxTester.  These can be drag installed.  \
+\
+
+\b Documentation\
+
+\b0 \
+Documentation for the OS X Font Tools is included.  The documentation may not always cover the full functionality of each tool.  The most current documentation for the Unix command-line utilities is available by executing them with the -h or --help option (for help).  \
+\
+Apple's version of the TrueType specification is included for convenience.  The latest version is available on-line at <http://developer.apple.com/fonts/TTRefMan/index.html>.  \
+\
+\
+
+\fs22 \'a9 2002-2011 Apple, Inc. All rights reserved. \
+}
